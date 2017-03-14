@@ -1,0 +1,27 @@
+# finder poop
+.DS_Store
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.d
+
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.out
+*.app
+*.obj
+config.mk
+.*~

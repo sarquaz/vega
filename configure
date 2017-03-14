@@ -1,0 +1,74 @@
+#! /bin/bash
+
+
+exit
+
+PREFIX="/usr/local"
+OPENSSL="no"
+
+
+show_help() {
+cat <<EOF
+Configure.
+
+--help                      This help.
+--prefix=DIR                Prefix. Default is $PREFIX
+--with-openssl              Enable OpenSSL support                            
+
+EOF
+}
+
+
+while [ -n "$1" ]
+do
+   value="`echo $1 | sed 's/[^=]*.\(.*\)/\1/'`"
+   key="`echo $1 | sed 's/=.*//'`"
+   if `echo "$value" | grep "~" >/dev/null 2>/dev/null`
+   then
+      echo
+      echo '*WARNING*: the "~" sign is not expanded in flags.'
+      echo 'If you mean the home directory, use $HOME instead.'
+      echo
+   fi
+   case "$key" in
+   --help)
+      show_help
+      exit 0
+      ;;
+   --prefix)
+      [ -n "$value" ] || die "Missing value in flag $key."
+      PREFIX="$value"
+      ;;
+   --with-openssl)
+     OPENSSL="yes"
+     ;;  
+   *)
+      die "Error: Unknown flag: $1"
+      ;;
+   esac
+   shift
+done
+
+cat <<EOF > config.mk
+DEST=$PREFIX
+OPENSSL=$OPENSSL
+EOF
+
+cp config.mk deps/luajit
+
+if [ -e ".gitmodules" ]
+then
+    git submodule init
+    git submodule update
+fi
+
+TAU_FLAGS="--static"
+
+if [ "$OPENSSL" = "yes" ]
+then
+    TAU_FLAGS="$TAU_FLAGS --with-openssl"
+fi
+
+
+cd deps/tau && ./configure $TAU_FLAGS
+
