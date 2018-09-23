@@ -1,4 +1,4 @@
-#Vega
+## Vega
 
 What if there was a technology so simple that small children with no prior computing experience could easily pick it up, using a programming language with a syntax described fully by a single page? What if it was so fast and energy efficient that it could run on most budget hardware, including robots that kids play with? What if kids were enjoying using it so much they were programing everything with it?
 
