@@ -1,4 +1,4 @@
-##Vega
+## Vega
 
 What if there was a technology so simple that small children with no  computing experience could easily pick it up? What if it was so fast and energy efficient that it could run on most budget hardware, including robots that kids play with? What if kids were enjoying using it so much they were programming everything with it?
 
